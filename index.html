@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Gestão de Carro - Informações</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            transition: background-color 0.3s, color 0.3s; /* Transição suave */
+        }
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+        .projeto {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin: 30px 0;
+            padding: 30px;
+            background: #f9f9f9;
+            transition: background-color 0.5s;
+        }
+        body.escuro .projeto {
+            background-color: #444;
+            color: #fff;
+        }
+
+        .projeto img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            object-fit: cover;
+        }
+
+        .projeto p {
+            color: #333;
+            font-size: 1.1em; /* Ajuste do tamanho da fonte para melhorar a legibilidade */
+        }
+        body.escuro .projeto p {
+            color: #fff; /* Garantir que o texto da descrição seja branco no modo escuro */
+        }
+
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+        }
+        main {
+            padding: 40px;
+            max-width: 1200px;
+            margin: 20px auto;
+            background: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #333;
+            font-size: 2.5em;
+        }
+        .carro {
+            display: flex;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin: 20px 0;
+            overflow: hidden;
+            flex-direction: column; /* Para responsividade */
+            background-color: #fff; /* Cor de fundo para o modo claro */
+            transition: background-color 0.5s, border-color 0.5s; /* Transição suave */
+        }
+        body.escuro .carro {
+            background-color: #555; /* Fundo mais escuro no modo escuro */
+            border-color: #888; /* Cor de borda ajustada para o modo escuro */
+        }
+        .carro img {
+            max-width: 100%; /* Responsividade da imagem */
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+        }
+        .carro-info {
+            padding: 15px;
+            color: #333; /* Cor de texto para o modo claro */
+        }
+        body.escuro .carro-info {
+            color: #fff; /* Texto branco no modo escuro */
+        }
+        footer {
+            text-align: center;
+            padding: 10px 0;
+            background-color: #333;
+            color: white;
+            width: 100%;
+            position: relative;
+            bottom: 0;
+        }
+        /* Estilos para o modo escuro */
+        body.dark-mode {
+            background-color: #333;
+            color: white;
+        }
+        header.dark-mode {
+            background-color: #222;
+        }
+        nav a.dark-mode {
+            color: white;
+        }
+        main.dark-mode {
+            background-color: #444;
+            color: black;
+        }
+        footer.dark-mode {
+            background-color: #222;
+            color: red;
+        }
+    
+        button {
+            margin: 10px;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .toggle-button {
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        .toggle-button:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Bem-vindo ao Sistema de Gestão de Carro</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="sobre.html">Sobre nos</a>
+            <a href="contato.html">Contato</a>
+            <a href="usuarios.html">Lista de usuario</a>
+            <a href="produtos.html">Produto</a>
+            <a href="colocar.html">dados colocados</a>
+        </nav>
+        <button class="toggle-button" id="toggleButton">Modo Escuro</button> <!-- Botão para alternar modos -->
+    </header>
+    <main>
+        <h2>Informações sobre Carros</h2>
+
+        <!-- Exemplo de um carro -->
+        <div class="carro">
+            <img src="img/compara.jpg" alt="Carro 1">
+            <div class="carro-info">
+                <h3>Modelo: Bugatti la Voiture</h3>
+                <p><strong>Marca:</strong> Bugatti </p>
+                <p><strong>Ano:</strong> 2020</p>
+                <p><strong>Preço:</strong> R$ 5000.000</p>
+                <p><strong>Descrição:</strong> Um excelente carro, ideal para a família e viagens.</p>
+            </div>
+        </div>
+
+        <!-- Exemplo de outro carro -->
+        <div class="carro">
+            <img src="img/carro2.jpg" alt="Carro 2">
+            <div class="carro-info">
+                <h3>Modelo: Ferrari</h3>
+                <p><strong>Marca:</strong>Ferrari west </p>
+                <p><strong>Ano:</strong> 2021</p>
+                <p><strong>Preço:</strong> R$ 600.000</p>
+                <p><strong>Descrição:</strong> Carro esportivo, rápido e confortável.</p>
+            </div>
+        </div>
+
+        <!-- Você pode adicionar mais carros seguindo o mesmo modelo -->
+    </main>
+    <footer>
+        <p>© 2024 Sistema de Gestão de Carro</p>
+    </footer>
+    <script>
+        // Lógica para alternar entre modo claro e escuro
+        const toggleButton = document.getElementById('toggleButton');
+        toggleButton.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            document.querySelector('header').classList.toggle('dark-mode');
+            document.querySelector('footer').classList.toggle('dark-mode');
+
+            // Alterna a cor dos links
+            const navLinks = document.querySelectorAll('nav a');
+            navLinks.forEach(link => link.classList.toggle('dark-mode'));
+
+            // Altera o texto do botão
+            if (toggleButton.textContent === "Modo Escuro") {
+                toggleButton.textContent = "Modo Claro";
+            } else {
+                toggleButton.textContent = "Modo Escuro";
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Gestão de Carro - Informações</title>
+    <style>
+        /* Estilos globais */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        header {
+            background-color: #333;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+        header h1 {
+            font-size: 1.5em;
+            margin: 0;
+        }
+        main {
+            padding: 30px;
+            max-width: 900px;
+            margin: 20px auto;
+            background: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        h2, h3 {
+            color: #333;
+        }
+        section {
+            margin-bottom: 30px;
+        }
+
+        /* Estilo das tabelas */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #333;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        /* Estilo das informações dos carros */
+        .carro {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .carro img {
+            max-width: 150px;
+            margin-right: 20px;
+            border-radius: 5px;
+        }
+        .carro-info h3 {
+            margin: 0 0 10px;
+        }
+        .carro-info p {
+            margin: 5px 0;
+        }
+
+        /* Estilo para o footer */
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #333;
+            color: white;
+        }
+        footer button {
+            padding: 8px 16px;
+            margin-top: 10px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #666;
+            color: white;
+            font-size: 1em;
+        }
+
+        /* Modo escuro */
+        .dark-mode {
+            background-color: black;
+            color: white;
+        }
+        .dark-mode th {
+            background-color: #555;
+        }
+        .dark-mode footer {
+            background-color: #222;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Cabeçalho -->
+    <header>
+        <h1>Sistema de Gestão de Carro - Informações Gerais</h1>
+    </header>
+
+    <!-- Conteúdo principal -->
+    <main>
+        <!-- Seção de informações gerais -->
+        <h2>Informações Gerais</h2>
+
+        <!-- Lista de Usuários -->
+        <section>
+            <h3>Usuários Cadastrados</h3>
+            <table id="usuarios-table">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Lista de usuários será carregada aqui -->
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Lista de Produtos -->
+        <section>
+            <h3>Produtos Disponíveis</h3>
+            <table id="produtos-table">
+                <thead>
+                    <tr>
+                        <th>Produto</th>
+                        <th>Preço</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Lista de produtos será carregada aqui -->
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Seção de informações sobre carros -->
+        <h2>Informações sobre Carros</h2>
+
+        <!-- Exemplo de carro 1 -->
+        <div class="carro">
+            <img src="img/compara.jpg" alt="Carro Bugatti">
+            <div class="carro-info">
+                <h3>Modelo: Bugatti la Voiture</h3>
+                <p><strong>Marca:</strong> Bugatti</p>
+                <p><strong>Ano:</strong> 2020</p>
+                <p><strong>Preço:</strong> R$ 5.000.000</p>
+                <p><strong>Descrição:</strong> Um excelente carro, ideal para a família e viagens.</p>
+            </div>
+        </div>
+
+        <!-- Exemplo de carro 2 -->
+        <div class="carro">
+            <img src="img/carro2.jpg" alt="Carro Ferrari">
+            <div class="carro-info">
+                <h3>Modelo: Ferrari West</h3>
+                <p><strong>Marca:</strong> Ferrari</p>
+                <p><strong>Ano:</strong> 2021</p>
+                <p><strong>Preço:</strong> R$ 600.000</p>
+                <p><strong>Descrição:</strong> Carro esportivo, rápido e confortável.</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer com botão para alternar tema -->
+    <footer>
+        <button onclick="alternarTema()">Alternar para Modo Escuro/Claro</button>
+    </footer>
+
+    <!-- JavaScript para carregar dados das listas e alternância de temas -->
+    <script>
+        function carregarUsuarios() {
+            const usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
+            const usuariosTable = document.getElementById('usuarios-table').getElementsByTagName('tbody')[0];
+            usuariosTable.innerHTML = '';
+
+            usuarios.forEach(usuario => {
+                const row = usuariosTable.insertRow();
+                const nomeCell = row.insertCell(0);
+                const emailCell = row.insertCell(1);
+
+                nomeCell.textContent = usuario.nome;
+                emailCell.textContent = usuario.email;
+            });
+        }
+
+        function carregarProdutos() {
+            const produtos = JSON.parse(localStorage.getItem('produtos')) || [];
+            const produtosTable = document.getElementById('produtos-table').getElementsByTagName('tbody')[0];
+            produtosTable.innerHTML = '';
+
+            produtos.forEach(produto => {
+                const row = produtosTable.insertRow();
+                const nomeCell = row.insertCell(0);
+                const precoCell = row.insertCell(1);
+
+                nomeCell.textContent = produto.nome;
+                precoCell.textContent = `R$ ${produto.preco.toFixed(2)}`;
+            });
+        }
+
+        function alternarTema() {
+            const body = document.body;
+            body.classList.toggle('dark-mode');
+            const temaAtual = body.classList.contains('dark-mode') ? 'escuro' : 'claro';
+            localStorage.setItem('tema', temaAtual);
+        }
+
+        // Carregar tema salvo
+        window.onload = function() {
+            carregarUsuarios();
+            carregarProdutos();
+            const temaSalvo = localStorage.getItem('tema');
+            if (temaSalvo === 'escuro') {
+                document.body.classList.add('dark-mode');
+            }
+        };
+    </script>
+</body>
+</html>

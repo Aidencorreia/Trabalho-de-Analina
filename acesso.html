@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Gestão de Carro - Usuário</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #555;
+        }
+        .login-form, .cadastro-form, .usuario-info {
+            display: none;
+        }
+        .usuario-info h3 {
+            margin-top: 0;
+        }
+        footer {
+            text-align: center;
+            padding: 10px 0;
+            background-color: #333;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Sistema de Gestão de Carro - Área do Usuário</h1>
+    </header>
+
+    <div class="container">
+        <!-- Formulário de Cadastro -->
+        <div class="cadastro-form">
+            <h2>Cadastro de Usuário</h2>
+            <div class="form-group">
+                <label for="cadastro-nome">Nome:</label>
+                <input type="text" id="cadastro-nome" placeholder="Digite seu nome">
+            </div>
+            <div class="form-group">
+                <label for="cadastro-email">Email:</label>
+                <input type="email" id="cadastro-email" placeholder="Digite seu email">
+            </div>
+            <div class="form-group">
+                <label for="cadastro-senha">Senha:</label>
+                <input type="password" id="cadastro-senha" placeholder="Digite sua senha">
+            </div>
+            <button onclick="cadastrarUsuario()">Cadastrar</button>
+            <p>Já tem uma conta? <a href="#" onclick="mostrarLogin()">Faça login aqui</a></p>
+        </div>
+
+        <!-- Formulário de Login -->
+        <div class="login-form">
+            <h2>Login</h2>
+            <div class="form-group">
+                <label for="login-email">Email:</label>
+                <input type="email" id="login-email" placeholder="Digite seu email">
+            </div>
+            <div class="form-group">
+                <label for="login-senha">Senha:</label>
+                <input type="password" id="login-senha" placeholder="Digite sua senha">
+            </div>
+            <button onclick="loginUsuario()">Entrar</button>
+            <p>Não tem uma conta? <a href="#" onclick="mostrarCadastro()">Cadastre-se aqui</a></p>
+        </div>
+
+        <!-- Página do Usuário (acesso restrito) -->
+        <div class="usuario-info">
+            <h2>Bem-vindo, <span id="usuario-nome"></span></h2>
+            <p>Você tem acesso às informações dos carros.</p>
+            <button onclick="sair()">Sair</button>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2024 Sistema de Gestão de Carro</p>
+    </footer>
+
+    <script>
+        // Funções de exibição de formulários
+        function mostrarCadastro() {
+            document.querySelector('.cadastro-form').style.display = 'block';
+            document.querySelector('.login-form').style.display = 'none';
+        }
+
+        function mostrarLogin() {
+            document.querySelector('.login-form').style.display = 'block';
+            document.querySelector('.cadastro-form').style.display = 'none';
+        }
+
+        // Função para cadastrar o usuário
+        function cadastrarUsuario() {
+            const nome = document.getElementById('cadastro-nome').value;
+            const email = document.getElementById('cadastro-email').value;
+            const senha = document.getElementById('cadastro-senha').value;
+
+            if (nome && email && senha) {
+                localStorage.setItem('usuario', JSON.stringify({ nome, email, senha }));
+                alert('Cadastro realizado com sucesso!');
+                window.location.href = "index.html"; // Redireciona para a página index.html após cadastro
+            } else {
+                alert('Por favor, preencha todos os campos.');
+            }
+        }
+
+        // Função para fazer login
+        function loginUsuario() {
+            const email = document.getElementById('login-email').value;
+            const senha = document.getElementById('login-senha').value;
+            const usuario = JSON.parse(localStorage.getItem('usuario'));
+
+            if (usuario && usuario.email === email && usuario.senha === senha) {
+                document.querySelector('.login-form').style.display = 'none';
+                document.querySelector('.usuario-info').style.display = 'block';
+                document.getElementById('usuario-nome').textContent = usuario.nome;
+                localStorage.setItem('loggedIn', 'true'); // Marca o login como verdadeiro no localStorage
+                window.location.href = "index.html"; // Redireciona para a página index.html após login bem-sucedido
+            } else {
+                alert('Email ou senha incorretos.');
+            }
+        }
+
+        // Função para sair da página de usuário
+        function sair() {
+            localStorage.setItem('loggedIn', 'false'); // Marca o usuário como deslogado
+            document.querySelector('.usuario-info').style.display = 'none';
+            mostrarLogin();
+            window.location.href = "index.html"; // Redireciona para a página index.html após sair
+        }
+
+        // Função para verificar se o usuário está logado
+        function verificarLogin() {
+            const loggedIn = localStorage.getItem('loggedIn');
+            if (loggedIn === 'true') {
+                document.querySelector('.login-form').style.display = 'none';
+                document.querySelector('.usuario-info').style.display = 'block';
+                const usuario = JSON.parse(localStorage.getItem('usuario'));
+                document.getElementById('usuario-nome').textContent = usuario.nome;
+            } else {
+                mostrarLogin(); // Exibe o login caso o usuário não esteja logado
+            }
+        }
+
+        // Verifica o login ao carregar a página
+        verificarLogin();
+    </script>
+</body>
+</html>

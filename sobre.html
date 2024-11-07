@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre Mim - FrontOffice</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Garante que o corpo ocupa pelo menos 100% da altura da tela */
+            transition: background-color 0.5s, color 0.5s; /* Transição suave de cores */
+        }
+        body.claro {
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        body.escuro {
+            background-color: #000; /* Fundo preto no modo escuro */
+            color: #fff; /* Texto branco no modo escuro */
+        }
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+        }
+        main {
+            padding: 40px;
+            max-width: 1200px; /* Aumentar a largura máxima do main */
+            margin: 20px auto;
+            background: white; /* Fundo branco padrão */
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            flex: 1; /* Permite que o main ocupe o espaço disponível */
+            display: flex;
+            flex-wrap: wrap; /* Permitir que as colunas se empilhem se houver muito conteúdo */
+            gap: 40px; /* Espaço entre as colunas */
+            transition: background-color 0.5s; /* Transição suave para o fundo do main */
+        }
+        body.escuro main {
+            background: #333; /* Fundo escuro para o main no modo escuro */
+        }
+        .coluna {
+            flex: 1; /* Cada coluna ocupará a mesma largura */
+            min-width: 300px; /* Largura mínima para as colunas */
+            height: auto; /* A altura das colunas se ajustará ao conteúdo */
+            padding: 20px;
+            background-color: #fff; /* Fundo branco padrão para colunas */
+            border-radius: 5px;
+            box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.5s, color 0.5s; /* Transição suave para o fundo e texto das colunas */
+        }
+        body.escuro .coluna {
+            background-color: #444; /* Fundo das colunas escuro no modo escuro */
+            color: #fff; /* Texto das colunas branco no modo escuro */
+        }
+        h2 {
+            font-size: 2em;
+        }
+        footer {
+            text-align: center;
+            padding: 10px 0;
+            background-color: #333;
+            color: white;
+            position: relative;
+            width: 100%;
+        }
+        .botao-tema {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 1em;
+            margin: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .botao-tema:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+<body class="claro">
+    <header>
+        <h1>Sobre Nos</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="sobre.html">Sobre nos</a>
+            <a href="contato.html">Contato</a>
+            <a href="usuarios.html">Lista de usuario</a>
+            <a href="produtos.html">Produto</a>
+            <a href="colocar.html">dados colocados</a>
+        </nav>
+        <button class="botao-tema" id="toggle-theme">Modo Escuro</button>
+    </header>
+    <main>
+        <div class="coluna">
+            <h2>Quem somos?</h2>
+            <p>Olá! Somos um grupo de jovens programadores, entuasiasto de tecnologia e desenvolvimento web. Estamos sempre em busca de aprender e aprimorar as nossas habilidades.</p>
+        </div>
+
+        <div class="coluna">
+            <h2>Experiência</h2>
+            <p>Temos trabalhado em diversos projetos, incluindo sistemas de gestão e websites, utilizando tecnologias como HTML, CSS, JavaScript e bancos de dados.</p>
+        </div>
+        
+        <div class="coluna">
+            <h2>Habilidades</h2>
+            <ul>
+                <li>Desenvolvimento Frontend</li>
+                <li>HTML, CSS e JavaScript</li>
+                <li>Responsividade e design intuitivo</li>
+                <li>Trabalho em equipe e comunicação</li>
+            </ul>
+        </div>
+
+        <div class="coluna">
+            <h2>Interesses</h2>
+            <p>Além de programação, gostamos de ler sobre novas tecnologias, participar de hackathons e explorar novas ideias de design.</p>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2024 Sistema de Gestão de Carros</p>
+    </footer>
+    <script>
+        const toggleButton = document.getElementById('toggle-theme');
+        toggleButton.addEventListener('click', () => {
+            document.body.classList.toggle('escuro');
+            document.body.classList.toggle('claro');
+            toggleButton.textContent = document.body.classList.contains('escuro') ? 'Modo Claro' : 'Modo Escuro';
+        });
+    </script>
+</body>
+</html>

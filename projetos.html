@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projetos de Carros</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            transition: background-color 0.5s, color 0.5s; /* Transição suave */
+        }
+        body.claro {
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        body.escuro {
+            background-color: #000; /* Fundo preto no modo escuro */
+            color: #fff; /* Texto branco no modo escuro */
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 15px 0; /* Padding do cabeçalho */
+            text-align: center;
+        }
+        nav a {
+            color: white;
+            margin: 0 20px; /* Espaçamento entre os links do menu */
+            text-decoration: none;
+        }
+
+        h
+        main {
+            padding: 50px; /* Aumentando o padding interno */
+            max-width: 1400px; /* Aumentando a largura máxima do corpo */
+            margin: 20px auto; /* Centralizando o corpo na página */
+            background: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.5s; /* Transição suave para o fundo do main */
+        }
+        body.escuro main {
+            background: #333; /* Fundo escuro para o main no modo escuro */
+        }
+        h2 {
+            color: #333;
+            font-size: 2.5em; /* Aumentando o tamanho da fonte do título */
+            text-align: center;
+        }
+        .projeto {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin: 30px 0; /* Aumentando a margem entre os projetos */
+            padding: 30px; /* Aumentando o padding interno dos projetos */
+            background: #f9f9f9;
+            transition: background-color 0.5s; /* Transição suave para o fundo das colunas */
+        }
+        body.escuro .projeto {
+            background-color: #444; /* Fundo escuro para os projetos no modo escuro */
+            color: #fff; /* Texto dos projetos branco no modo escuro */
+        }
+        .projeto img {
+            max-width: 100%;  /* Garantindo que as imagens não ultrapassem o tamanho da caixa */
+            height: auto; /* Mantendo a proporção das imagens */
+            border-radius: 5px;
+            object-fit: cover; /* Ajustando a imagem para cobrir o espaço, se necessário */
+        }
+        footer {
+            text-align: center;
+            padding: 20px 0; /* Aumentando o padding do rodapé */
+            background-color: #333;
+            color: white;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            position: fixed;
+        }
+        .botao-tema {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 1em;
+            margin: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .botao-tema:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            main {
+                padding: 20px; /* Diminui o padding em telas menores */
+            }
+            h2 {
+                font-size: 2em; /* Reduz o tamanho do título em telas menores */
+            }
+            .projeto {
+                padding: 20px; /* Diminui o padding dos projetos em telas menores */
+            }
+        }
+    </style>
+</head>
+<body class="claro">
+    <header>
+        <h1>Projetos de Carros</h1>
+        <button class="botao-tema" id="toggle-theme">Modo Escuro</button>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="sobre.html">Sobre nos</a>
+            <a href="contato.html">Contato</a>
+            <a href="usuarios.html">Lista de usuario</a>
+            <a href="produtos.html">Produto</a>
+            <a href="colocar.html">dados colocados</a>
+        </nav>
+    </header>
+    <h2>Lista de Projetos</h2>
+    <main>
+       
+
+        <!-- Exemplo de um projeto -->
+        <div class="projeto">
+            <h3>Projeto 1: Sistema de Gestão de Carros</h3>
+            <img src="img/geta.jpg" alt="Sistema de Gestão de Carros">
+            <p><strong>Descrição:</strong> Um sistema para gerenciar informações sobre carros, incluindo cadastro, edição e remoção de veículos.</p>
+            <p><strong>Tecnologias Utilizadas:</strong> HTML, CSS, JavaScript</p>
+        </div>
+
+        <div class="projeto">
+            <h3>Projeto 2: Avaliação de Desempenho de Carros</h3>
+            <img src="img/avali.jpg" alt="Avaliação de Desempenho de Carros">
+            <p><strong>Descrição:</strong> Uma aplicação para avaliar o desempenho de diferentes modelos de carros com base em especificações técnicas.</p>
+            <p><strong>Tecnologias Utilizadas:</strong> HTML, CSS, JavaScript, PHP</p>
+        </div>
+
+        <div class="projeto">
+            <h3>Projeto 3: Comparador de Preços de Carros</h3>
+            <img src="img/carro5.jpg" alt="Comparador de Preços de Carros">
+            <p><strong>Descrição:</strong> Uma plataforma que permite comparar preços de diferentes modelos de carros de várias concessionárias.</p>
+            <p><strong>Tecnologias Utilizadas:</strong> HTML, CSS, JavaScript, API </p>
+        </div>
+
+        <!-- Adicione mais projetos aqui seguindo o mesmo modelo -->
+    </main>
+    <footer>
+        <p>&copy; 2024 Sistema de Gestão de Carros</p>
+    </footer>
+    <script>
+        const toggleButton = document.getElementById('toggle-theme');
+        toggleButton.addEventListener('click', () => {
+            document.body.classList.toggle('escuro');
+            document.body.classList.toggle('claro');
+            toggleButton.textContent = document.body.classList.contains('escuro') ? 'Modo Claro' : 'Modo Escuro';
+        });
+    </script>
+</body>
+</html>

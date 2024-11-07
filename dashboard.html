@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - BackOffice</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Dashboard Administrativa</h1>
+    </header>
+
+    <nav>
+        <a href="usuarios.html">Gerenciar Usuários</a>
+        <a href="login.html">Logout</a>
+    </nav>
+
+    <main>
+        <h2>Bem-vindo ao painel administrativo</h2>
+        <p>Aqui você pode gerenciar os usuários e as configurações do sistema.</p>
+    </main>
+
+
+    <form id="carroForm">
+        <input type="text" id="marca" placeholder="Marca" required />
+        <input type="text" id="modelo" placeholder="Modelo" required />
+        <button type="submit">Adicionar Carro</button>
+    </form>
+    
+    <ul id="carroList"></ul>
+    
+    <script>
+        const carroForm = document.getElementById('carroForm');
+        const carroList = document.getElementById('carroList');
+    
+        // Atualiza a lista de carros na interface
+        const renderCarros = () => {
+            carroList.innerHTML = '';
+            getCarros().forEach((carro, index) => {
+                const li = document.createElement('li');
+                li.textContent = `${carro.marca} ${carro.modelo}`;
+                li.innerHTML += ` <button onclick="deleteCarro(${index})">Excluir</button>`;
+                carroList.appendChild(li);
+            });
+        };
+    
+        carroForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const marca = document.getElementById('marca').value;
+            const modelo = document.getElementById('modelo').value;
+            addCarro({ marca, modelo });
+            renderCarros();
+            carroForm.reset();
+        });
+    
+        // Renderiza a lista ao carregar a página
+        document.addEventListener('DOMContentLoaded', renderCarros);
+    </script>
+
+
+
+
+    <footer>
+        <p>&copy; 2024 Sistema de Gestão de Carros</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
+

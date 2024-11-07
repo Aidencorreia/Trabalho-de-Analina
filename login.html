@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Gestão de Carros</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+            background-image: url('img/carro2.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        header, footer {
+            background-color: rgba(51, 51, 51, 0.8);
+            color: white;
+            padding: 10px 0;
+            width: 100%;
+            text-align: center;
+        }
+        main {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin: 5px 0 5px;
+        }
+        input {
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px;
+            background-color: #5cb85c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #4cae4c;
+        }
+        .toggle-form {
+            color: blue;
+            cursor: pointer;
+            text-align: center;
+            margin-top: 10px;
+        }
+        .error, .success {
+            display: none;
+            margin-top: 10px;
+        }
+        .error {
+            color: red;
+        }
+        .success {
+            color: green;
+        }
+    
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Sistema de Gestão de Carros</h1>
+    </header>
+    
+    <main>
+     
+        <!-- Cadastro de novo usuário -->
+        <div id="registerContainer">
+            <h2>Cadastro</h2>
+            <form id="registerForm">
+                <label for="newUsername">Usuário:</label>
+                <input type="text" id="newUsername" placeholder="Usuário" required>
+                <label for="newPassword">Senha:</label>
+                <input type="password" id="newPassword" placeholder="Senha" required>
+                <button type="submit">Cadastrar</button>
+                <div id="registerSuccess" class="success">Cadastro realizado com sucesso!</div>
+                <div id="registerError" class="error">Usuário já cadastrado.</div>
+            </form>
+            <p class="toggle-form" id="switchToLogin">Já possui uma conta? Faça login</p>
+              <a href="informações.html">entrar na pagina como visitante apenas para visualizar</a>
+            
+        </div>
+
+        <!-- Formulário de login -->
+        <div id="loginContainer" style="display:none;">
+            <h2>Login</h2>
+            <form id="loginForm">
+                <label for="username">Usuário:</label>
+                <input type="text" id="username" placeholder="Usuário" required>
+                <label for="password">Senha:</label>
+                <input type="password" id="password" placeholder="Senha" required>
+                <button type="submit">Entrar</button>
+                <div id="loginError" class="error">Usuário ou senha incorretos.</div>
+            </form>
+            <p class="toggle-form" id="switchToRegister">Não possui uma conta? Cadastre-se</p>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Sistema de Gestão de Carros</p>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const registerForm = document.getElementById("registerForm");
+            const loginForm = document.getElementById("loginForm");
+            const registerSuccess = document.getElementById("registerSuccess");
+            const registerError = document.getElementById("registerError");
+            const loginError = document.getElementById("loginError");
+            const registerContainer = document.getElementById("registerContainer");
+            const loginContainer = document.getElementById("loginContainer");
+
+            // Alterna entre os formulários de cadastro e login
+            document.getElementById("switchToLogin").addEventListener("click", function() {
+                registerContainer.style.display = "none";
+                loginContainer.style.display = "block";
+            });
+            document.getElementById("switchToRegister").addEventListener("click", function() {
+                loginContainer.style.display = "none";
+                registerContainer.style.display = "block";
+            });
+
+            // Processa o formulário de cadastro
+            registerForm.addEventListener("submit", function(event) {
+                event.preventDefault();
+                const newUsername = document.getElementById("newUsername").value;
+                const newPassword = document.getElementById("newPassword").value;
+
+                if (localStorage.getItem(newUsername)) {
+                    registerError.style.display = "block";
+                    registerSuccess.style.display = "none";
+                } else {
+                    localStorage.setItem(newUsername, newPassword);
+                    registerSuccess.style.display = "block";
+                    registerError.style.display = "none";
+                    registerForm.reset();
+                    registerContainer.style.display = "none";
+                    loginContainer.style.display = "block";
+                }
+            });
+
+            // Processa o formulário de login
+            loginForm.addEventListener("submit", function(event) {
+                event.preventDefault();
+                const username = document.getElementById("username").value;
+                const password = document.getElementById("password").value;
+
+                if (localStorage.getItem(username) === password) {
+                    alert("Login bem-sucedido!");
+                    window.location.href = "index.html";
+                } else {
+                    loginError.style.display = "block";
+                }
+            });
+        });
+    </script>
+</body>
+</html>
